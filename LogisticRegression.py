@@ -30,14 +30,14 @@ sess = tf.Session()
 sess.as_default()
 init = tf.global_variables_initializer()
 sess.run(init)
-iteration = 100000
-step = 10000  # 0为不输出节 单步时间默认为每次迭代
+iteration = 10000
+step = 1000  # 0为不输出节 单步时间默认为每次迭代
 
 #  matplotlib 初始化
 plt.ticklabel_format(style = "plain")
 plt.title("LogisticRegression Test @ " + "{:e}".format(learning_rate) + " Learning Rate")
 plt.plot(sample[1, : 7], sample[2, : 7], "rx", label = "sample 1")
-plt.plot(sample[1, 7: 13], sample[2, 7: 13], "bx", label = "sample 2")
+plt.plot(sample[1, 7: 14], sample[2, 7: 14], "bx", label = "sample 2")
 
 #  训练
 start_time = time.time()
