@@ -59,29 +59,39 @@ t_result = sess.run(t)
 print("t1: {0}\nt2: {1}\nt3: {2}\n--------------------------------------------------------".format(t_result[:, 0],
                                                                                                    t_result[:, 1],
                                                                                                    t_result[:, 2]))
+saver = tf.train.Saver()
+saver.save(sess, "model/LogisticRegression.ckpt")
 
 #  测试
 test = np.array([[1, 2, 2], [1, 6, 6], [1, 5, 5], [1, 4.5, 4.5], [1, 4, 4]], dtype = np.float64).T
 result = sess.run(h, {x: test})
 print("Test model by\n", test)
 print("Result:", result)
-
 plt.plot(test[1, 0], test[2, 0], "ro", label = "test 1")
 plt.plot(test[1, 1], test[2, 1], "bo", label = "test 2")
 plt.plot(test[1, 2], test[2, 2], "bo", label = "test 3")
 plt.plot(test[1, 3], test[2, 3], "bo", label = "test 4")
 plt.plot(test[1, 4], test[2, 4], "ro", label = "test 5")
-
-
 plt.text(2 + 0.1, 2 + 0.1, "{:.2f}%".format((1 - result[0][0]) * 100))
 plt.text(6 + 0.1, 6 + 0.1, "{:.2f}%".format(result[0][1] * 100))
 plt.text(5 + 0.1, 5 + 0.1, "{:.2f}%".format(result[0][2] * 100))
 plt.text(4.5 + 0.1, 4.5 + 0.1, "{:.2f}%".format(result[0][3] * 100))
 plt.text(4 + 0.1, 4 + 0.1, "{:.2f}%".format((1 - result[0][4]) * 100))
-
 plt.legend()
 plt.show()
 
-saver = tf.train.Saver()
-saver.save(sess, "model/LogisticRegression.ckpt")
+#  输入测试
+print("--------------------------------------------------------\n")
+test_x = 0
+test_y = 0
+while test_x != "q" or test_y != "q":
+	test_x = input()
+	test_y = input()
+	test = np.array([[1, test_x, test_y]], dtype = np.float64).T
+	result = sess.run(h, {x: test})
+	if result[0][0] < 0.5:
+		print("Class red. {:.2f}%".format((1 - result[0][0]) * 100))
+	else:
+		print("Class blue. {:.2f}%".format((result[0][0]) * 100))
+
 sess.close()
