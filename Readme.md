@@ -7,6 +7,7 @@
 * 多元线性回归  
     * 样本缩放
 * 逻辑回归
+* 简单的两层神经网络数学实现(SimpleNN.py SimpleNN_test.py)
 
 随着学习的进行，会commit新的内容。
 
