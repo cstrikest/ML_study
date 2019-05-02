@@ -8,6 +8,8 @@
     * 样本缩放
 * 逻辑回归
 * 简单的两层神经网络数学实现(SimpleNN.py SimpleNN_test.py)
+* tensorflow.keras模块的教程实现(MNIST_keras_test.py)
+* 使用keras进行多元线性回归(Multi_Gradient_Descent_Keras.py)
 
 随着学习的进行，会commit新的内容。
 
