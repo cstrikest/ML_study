@@ -2,8 +2,6 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
-from tensorflow import Session
-
 
 np.set_printoptions(suppress = True)
 
