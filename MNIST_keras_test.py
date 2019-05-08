@@ -24,6 +24,7 @@ def f_load_mnist(path, kind = 'train'):
 		images = np.frombuffer(imgpath.read(), dtype = np.uint8, offset = 16).reshape(len(labels), 28, 28)
 	
 	return images, labels
+
 train_images, train_labels = f_load_mnist('data/fashion', kind = 'train')
 test_images, test_labels = f_load_mnist('data/fashion', kind = 't10k')
 train_images = train_images / 255.0  # 标准化
@@ -33,9 +34,12 @@ model = keras.Sequential([  # 神经网络
 	keras.layers.Dense(128, activation = tf.nn.relu),  # 128神经元全连接层
 	keras.layers.Dense(10, activation = tf.nn.softmax)  # 输出层，维度10，和为1，为预测概率
 ])
+
 model.compile(optimizer = tf.train.AdamOptimizer(),  # 喂损失函数，梯度下降逆向传输， 精准型
               loss = 'sparse_categorical_crossentropy', metrics = ['accuracy'])
 model.fit(train_images, train_labels, epochs = 5)  # 训练，每Batch 60000组，50个Batch
+print(train_images.shape, train_labels.shape)
+
 test_loss, test_acc = model.evaluate(test_images, test_labels, 32, 1)
 print('Test accuracy:', test_acc)
 prediction = model.predict(train_images)

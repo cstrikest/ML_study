@@ -10,14 +10,7 @@ label = np.zeros(shape = (1, 0), dtype = np.float64)
 
 # csv读取初始化
 start_time = time.time()
-filename_queue = tf.train.string_input_producer(
-	[
-		"CCPP/CCPP_1.csv",
-		"CCPP/CCPP_2.csv",
-		"CCPP/CCPP_3.csv",
-		"CCPP/CCPP_4.csv",
-		"CCPP/CCPP_5.csv"
-	], shuffle = False, capacity = 1)
+filename_queue = tf.train.string_input_producer(["data/CCPP/CCPP_train.csv"], shuffle = False, capacity = 1)
 
 reader = tf.TextLineReader(skip_header_lines = 1)
 key, value = reader.read(filename_queue)
@@ -32,7 +25,7 @@ with tf.Session() as sess:
 	# 启动线程
 	threads = tf.train.start_queue_runners(coord = coord)
 	is_second_read = 0
-	line1_name = b'%s:2' % b"CCPP/CCPP_1.csv"
+	line1_name = b'%s:2' % b"data/CCPP/CCPP_train.csv"
 	iteration = 1
 	
 	# 开始加载循环
@@ -143,8 +136,6 @@ plt.show()
 print("t:", sess.run(t))
 saver = tf.train.Saver()
 saver.save(sess, "model/Multi-Regression.ckpt")
-
-# 测试
 
 # 将测试数据缩放
 def scale(n = []):
