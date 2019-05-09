@@ -2,6 +2,15 @@
 
 本项目主要是为方便在多平台上共享代码所使用的个人学习场地。  
 
+依赖库:
+* tensorflow / tensorflow-gpu
+* numpy
+* pandas
+* matplotlib
+* pillow
+* h5py
+* gym
+
 #### Gradient_Descent.py
 一元线性回归，梯度下降。
 
